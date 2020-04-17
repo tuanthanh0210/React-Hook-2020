@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './App.scss';
 import TodoList from './components/TodoList/TodoList';
 // import ColorBox from './components/ColorBox/ColorBox';
@@ -15,10 +15,21 @@ function App () {
     newTodo.splice (index, 1);
     setTodoList (newTodo);
   }
+
+  function handleAddTodo(value){
+    const newTodo = {
+      id: todoList.length+1,
+      title: value
+    }
+
+    const newTodoList = [...todoList];
+    newTodoList.push(newTodo);
+    setTodoList(newTodoList)
+  }
   return (
     <div className="App">
       {/* <ColorBox /> */}
-      <TodoList todos={todoList} onTodoClick={handleRemoveTodo} />
+      <TodoList todos={todoList} onTodoClick={handleRemoveTodo} onTodoSubmit={handleAddTodo}/>
     </div>
   );
 }
