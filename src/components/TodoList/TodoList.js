@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './TodoList.scss'
 
 TodoList.propTypes = {
   todos: PropTypes.array,
@@ -20,7 +21,8 @@ function TodoList (props) {
     }
   }
   return (
-    <div>
+    <div className='TodoList'>
+    <h2>React Hook - TodoList</h2>
       <ul>
       {todos.map(todo => (
         <li key={todo.id} onClick={() => handleClick (todo)}>{todo.title}</li>
