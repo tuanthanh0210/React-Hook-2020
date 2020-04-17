@@ -6,6 +6,7 @@ import Pagination from './components/Pagination/Pagination';
 import queryString from 'query-string'
 import PostFilterForm from './components/PostFilterForm/PostFilterForm';
 import Clock from './components/Clock/Clock';
+import Clock2 from './components/Clock/Clock2';
 
 function App () {
   const [todoList, setTodoList] = useState ([
@@ -92,6 +93,8 @@ function App () {
       {
         showClock && <Clock />
       }
+
+      <Clock2 />
 
       {/* <PostFilterForm onSubmit={handleFilterChange}/>
       <PostList posts={postList} />
