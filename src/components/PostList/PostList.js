@@ -7,7 +7,7 @@ PostList.propTypes = {
     posts: PropTypes.array,
 };
 
-PostList.propTypes = {
+PostList.defaultProps = {
     posts : []
 }
 
@@ -15,7 +15,6 @@ function PostList(props) {
     const {posts} = props;
     return (
         <div className='PostList'>
-            <h2>React Hook - PostList</h2>
             <ul>
                 {
                     posts.map(post => (
