@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.scss';
-import TodoList from './components/TodoList/TodoList';
-// import ColorBox from './components/ColorBox/ColorBox';
+import axios from 'axios';
+import PostList from './components/PostList/PostList';
 
 function App () {
   const [todoList, setTodoList] = useState ([
@@ -9,6 +9,27 @@ function App () {
     {id: 2, title: 'Sleeping'},
     {id: 3, title: 'Coding'},
   ]);
+
+  const [postList, setPostList] = useState ([]);
+
+  useEffect (() => {
+    async function fetchData () {
+      try {
+        const postListAPI = await axios.get (
+          'http://js-post-api.herokuapp.com/api/posts?_limit=10&_page=1'
+        );
+        setPostList(postListAPI.data.data);
+      } catch (error) {
+        console.log (error);
+      }
+    }
+    fetchData()
+
+    // return () => {
+    //   cleanup;
+    // };
+  }, []);
+
   function handleRemoveTodo (todo) {
     const index = todoList.findIndex (x => x.id === todo.id);
     const newTodo = [...todoList];
@@ -16,20 +37,21 @@ function App () {
     setTodoList (newTodo);
   }
 
-  function handleAddTodo(value){
+  function handleAddTodo (value) {
     const newTodo = {
-      id: todoList.length+1,
-      title: value
-    }
+      id: todoList.length + 1,
+      title: value,
+    };
 
     const newTodoList = [...todoList];
-    newTodoList.push(newTodo);
-    setTodoList(newTodoList)
+    newTodoList.push (newTodo);
+    setTodoList (newTodoList);
   }
   return (
     <div className="App">
+      <PostList posts={postList} />
       {/* <ColorBox /> */}
-      <TodoList todos={todoList} onTodoClick={handleRemoveTodo} onTodoSubmit={handleAddTodo}/>
+      {/* <TodoList todos={todoList} onTodoClick={handleRemoveTodo} onTodoSubmit={handleAddTodo}/> */}
     </div>
   );
 }
